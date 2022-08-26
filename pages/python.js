@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, DialogContent, Dialog, DialogTitle } from "@material-ui/core"
 
 
-export default function python() {
+export default function Python() {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false)
 

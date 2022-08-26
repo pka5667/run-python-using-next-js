@@ -23,7 +23,7 @@ function generateString(length) {
 }
 
 
-export default async function (request, response) {
+export default async function Script(request, response) {
 	if (request.method == "POST" || request.method == "PUT") {
 			// console.log(request.body);
 			upload.single("bib-file")(request, response, async (result) => {
