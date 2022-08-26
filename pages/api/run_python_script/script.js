@@ -25,14 +25,14 @@ function generateString(length) {
 
 export default async function Script(request, response) {
 	if (request.method == "POST" || request.method == "PUT") {
-			// console.log(request.body);
+			console.log(request.body);
 			upload.single("bib-file")(request, response, async (result) => {
 				if (result instanceof Error) {
 					return console.log(result);
 				}
 
 				var fileData = request.file.buffer.toString();
-				// console.log(fileData)
+				console.log(fileData)
 				
 				try{
 					// save data into a file filename: file_time_random.txt
@@ -48,8 +48,8 @@ export default async function Script(request, response) {
 					return response.json({ output });
 				}
 				catch (err) {
-					// console.log(err);
-					response.send({"ok":"ok"})
+					console.log(err);
+					response.send({err})
 				}
 				
 			});

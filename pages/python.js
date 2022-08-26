@@ -31,7 +31,7 @@ export default function Python() {
         try {
             let res = await fetch("/api/run_python_script/script", { method: "POST", body: data })
             res = await res.json()
-            // console.log(res)
+            console.log(res)
 
             // save the result
             var blob = new Blob([res['output']], { type: "text/plain;charset=utf-8" });
@@ -40,7 +40,7 @@ export default function Python() {
             setLoading(false)
             setModal(false)
         } catch (err) {
-            // console.log(err)
+            console.log(err)
         }
     }
 
