@@ -39,12 +39,12 @@ export default async function Script(request, response) {
 					let ms = new Date()
 					ms = ms.getMilliseconds();
 					// var path = "python/uploaded/file_" + ms + "_" + generateString(5) + ".txt"
-					var path = "python/file_" + ms + "_" + generateString(5) + ".txt"
+					var path = "python/uploaded/file_" + ms + "_" + generateString(5) + ".txt"
 					fs.writeFileSync(path, fileData)
 					
 					const pythonProcess = execSync(`python python/test.py ${path}`) // to return output by console pythonProcess.toString()
 					const output = fs.readFileSync(path, "utf8")
-					fs.unlinkSync(path) // to delete file after work is done
+					// fs.unlinkSync(path) // to delete file after work is done
 					return response.json({ output });
 				}
 				catch (err) {
