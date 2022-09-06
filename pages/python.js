@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Button, DialogContent, Dialog, DialogTitle } from "@material-ui/core"
+import { setCookie, getCookie, hasCookie } from 'cookies-next';
 
 
 export default function Python() {
     const [file, setFile] = useState(null);
     const [loading, setLoading] = useState(false)
 
-    const saveFile = async (blob) => {
-        const a = document.createElement('a');
-        a.download = 'output.txt';
-        a.href = URL.createObjectURL(blob);
-        a.addEventListener('click', (e) => {
-          setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
-        });
-        a.click();
-      };
+    // const saveFile = async (blob) => {
+    //     const a = document.createElement('a');
+    //     a.download = 'output.txt';
+    //     a.href = URL.createObjectURL(blob);
+    //     a.addEventListener('click', (e) => {
+    //       setTimeout(() => URL.revokeObjectURL(a.href), 30 * 1000);
+    //     });
+    //     a.click();
+    //   };
       
 
     const handleChange = (e) => {
@@ -34,11 +35,23 @@ export default function Python() {
             console.log(res)
 
             // save the result
-            var blob = new Blob([res['output']], { type: "text/plain;charset=utf-8" });
-            saveFile(blob);
+            // var blob = new Blob([res['output']], { type: "text/plain;charset=utf-8" });
+            // saveFile(blob);
 
+            // add the file name in cookies of user
+            let myfiles = getCookie("myfiles")
+            if (myfiles == null) {
+                myfiles = []
+            }
+            else {
+                myfiles = JSON.parse(myfiles)
+            }
+            myfiles.push(res['file_name'])
+            setCookie("myfiles", JSON.stringify(myfiles))
+            
+            // redirect to next page
             setLoading(false)
-            setModal(false)
+            window.location.href = "/myprocess"
         } catch (err) {
             console.log(err)
         }

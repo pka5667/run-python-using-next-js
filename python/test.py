@@ -8,3 +8,9 @@ with open(sys.argv[1], 'r') as inp:
     y = inp.read().upper()
 with open(sys.argv[1], 'w') as out:
     out.write(y)
+    i = 1000000
+    while i:
+        out.write(str(i) + "\n")
+        i -= 1
+
+print("Done")
