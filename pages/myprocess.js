@@ -7,7 +7,7 @@ export default function Myprocess() {
     useEffect(() => {
         if (!hasCookie("myfiles")) {
             alert("You have not uploaded any file yet")
-            window.location.href = "/python"
+            window.location.href = "/"
         }
 
         fetch("/api/get_myfiles", { 

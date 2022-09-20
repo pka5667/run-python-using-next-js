@@ -22,11 +22,11 @@ function generateString(length) {
     return result;
 }
 
-async function runPythonScript(file_name){
+
+async function runPythonScript(file_name, script_name){
 	let path = "public/uploaded/" + file_name;
-	// const pythonProcess = execSync(`python python/test.py ${path}`) // to return output by console pythonProcess.toString()
-	// execSync(`python python/test.py ${path}`) // to return output by console pythonProcess.toString()
-	spawn("python", ["python/test.py", "public/uploaded/" + file_name])
+
+	spawn("python", ["python/" + script_name + ".py", path])
 	.on('exit', function (code, signal) {
 		console.log('child process exited with ' + `code ${code} and signal ${signal}`);
 		fs.writeFileSync("public/process_status/" + file_name, "completed")
@@ -36,9 +36,8 @@ async function runPythonScript(file_name){
 		fs.writeFileSync("public/process_status/" + file_name, "error")
 	});
 	console.log("completed");
-	// const output = fs.readFileSync(path, "utf8")
-	// fs.unlinkSync(path) // to delete file after work is done
 }
+
 
 export default function Script(request, response) {
 	if (request.method == "POST" || request.method == "PUT") {
@@ -49,35 +48,17 @@ export default function Script(request, response) {
 				}
 
 				var fileData = request.file.buffer.toString();
-				// console.log(fileData)
+				var script_name = request.body.python_script;
 				
-				// try{
-					// save data into a file filename: file_time_random.txt
-					let ms = new Date().getTime()
-					let file_name = "file_" + ms + "_" + generateString(5) + ".txt"
-					fs.writeFileSync("public/uploaded/" + file_name, fileData)
-					fs.writeFileSync("public/process_status/" + file_name, "processing")
+				// save data into a file filename: file_time_random.txt
+				let ms = new Date().getTime()
+				let file_name = "file_" + ms + "_" + generateString(5) + ".txt"
+				fs.writeFileSync("public/uploaded/" + file_name, fileData)
+				fs.writeFileSync("public/process_status/" + file_name, "processing")
 
-					console.log("processing started");
-					runPythonScript(file_name)
-					// .then(res => {
-					// 	console.log(res)
-					// 	console.log("completed after promise");
-					// })
-					// .catch(err => {
-					// 	console.log("Error from async function");
-					// 	console.log(err)
-					// })
+				runPythonScript(file_name, script_name)
 
-					console.log("file saved");
-
-					return response.json({ file_name })
-				// }
-				// catch (err) {
-				// 	console.log(err);
-				// 	response.send({err})
-				// }
-				
+				return response.json({ file_name })
 			});
 	}
 }
