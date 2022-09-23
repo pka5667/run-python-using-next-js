@@ -1,4 +1,5 @@
 import sys
+from printStatement import p
 
 print("Output from Python")
 print(sys.argv[1])
@@ -6,9 +7,11 @@ print(sys.argv[1])
 
 with open(sys.argv[1], 'r') as inp:
     y = inp.read().upper()
+
 with open(sys.argv[1], 'w') as out:
-    out.write("Updated by script test 2\n")
-    out.write(y)
+    out.write("Updated by script bp\n")
+    out.write(p(y))
+    # out.write(y)
     i = 1000000
     while i:
         out.write(str(i) + "\n")

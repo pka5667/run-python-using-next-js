@@ -81,9 +81,9 @@ export default function Python() {
             <form onSubmit={handleSubmit}>
                 <select name="python_script" id="python_script" style={{marginRight: "10px"}} onChange={handleScriptChange}>
                   <option value={undefined} selected>Select Python Script</option>
-                  <option value="test">test</option>
-                  <option value="test1">test1</option>
-                  <option value="test2">test2</option>
+                  <option value="mf">MF</option>
+                  <option value="cc">CC</option>
+                  <option value="bp">BP</option>
                 </select>
 
                 <input type="file" accept='.txt' onChange={handleChange} name="input_file"/>
