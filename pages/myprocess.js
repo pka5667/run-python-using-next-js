@@ -32,7 +32,7 @@ export default function Myprocess() {
                         <tr key={index}>
                             <td>{item.filename}</td>
                             <td>
-                                <a href={`/uploaded/${item.filename}`} download style={item.status ? {color:"blue"} : null}>{item.status == "completed"? "Download Now" : item.status}</a>
+                                <a href={`/results/${item.filename}`} download style={item.status ? {color:"blue"} : null}>{item.status == "completed"? "Download Now" : item.status}</a>
                             </td>
                         </tr>
                     )

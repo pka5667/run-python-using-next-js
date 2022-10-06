@@ -25,8 +25,9 @@ function generateString(length) {
 
 async function runPythonScript(file_name, script_name){
 	let path = "public/uploaded/" + file_name;
+	let resultPath = "public/results/" + file_name;
 
-	spawn("python", ["python/" + script_name + ".py", path])
+	spawn("python", ["python/" + script_name + ".py", path, resultPath])
 	.on('exit', function (code, signal) {
 		console.log('child process exited with ' + `code ${code} and signal ${signal}`);
 		fs.writeFileSync("public/process_status/" + file_name, "completed")

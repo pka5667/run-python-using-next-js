@@ -80,7 +80,7 @@ export default function Python() {
             <h2>Script will convert all data in file to uppercase</h2>
             <form onSubmit={handleSubmit}>
                 <select name="python_script" id="python_script" style={{marginRight: "10px"}} onChange={handleScriptChange}>
-                  <option value={undefined} selected>Select Python Script</option>
+                  <option value={undefined} selected>Select GO Sub-Ontology</option>
                   <option value="mf">MF</option>
                   <option value="cc">CC</option>
                   <option value="bp">BP</option>

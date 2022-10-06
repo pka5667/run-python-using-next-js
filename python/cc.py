@@ -1,17 +1,12 @@
 import sys
-
-print("Output from Python")
-print(sys.argv[1])
+from cc.cc_pred_ import main
 
 
-with open(sys.argv[1], 'r') as inp:
-    y = inp.read().upper()
-with open(sys.argv[1], 'w') as out:
-    out.write("Updated by script cc\n")
-    out.write(y)
-    i = 1000000
-    while i:
-        out.write(str(i) + "\n")
-        i -= 1
+with open(sys.argv[2], 'w') as out:
+    try:
+        y = main(sys.argv[1])
+        out.write(str(y))
+    except Exception as e:
+        out.write("Error: " + str(e))
 
 print("Done")
